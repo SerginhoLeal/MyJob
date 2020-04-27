@@ -10,7 +10,7 @@ const routes = express.Router();
 routes.post('/PwbsOs9YtfLi85clN8Sz', UsuarioController.login);
 routes.post('/NRBQlog6f2Pwnqe3adQJ', UsuarioController.store);
 
-routes.get('/all2', NewJobController.index);
+routes.get('/OTT7RrH1TRC7Ypo2iYtR', NewJobController.index);
 routes.post('/C7Ypo2iFU0OTT7RrH1TR', NewJobController.store);
 routes.get('/C7Ypo2iYtfLi8RrH1TRR', SearchController.index);
 
