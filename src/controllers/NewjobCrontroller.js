@@ -14,6 +14,7 @@ module.exports = {
             _id,
             nome,
             elo,
+            num,
             wpp,
         } = req.body;
 
@@ -27,6 +28,7 @@ module.exports = {
             _id,
             nome,
             elo,
+            nom,
             wpp,
         });
 
