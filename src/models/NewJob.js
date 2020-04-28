@@ -16,7 +16,7 @@ const SearchSchema = new Schema({
     },
     num:{
         type: String,
-        required: true,
+        required: false,
     },
     wpp:{
         type: String,
