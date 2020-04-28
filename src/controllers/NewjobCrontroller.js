@@ -28,7 +28,7 @@ module.exports = {
             _id,
             nome,
             elo,
-            nom,
+            num,
             wpp,
         });
 
