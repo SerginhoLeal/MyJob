@@ -8,16 +8,19 @@ module.exports = {
         const { user } = req.headers;//pega o usuario logado.
         const { devId } = req.params;//pega o usuario selecionado e não logado.
 
-        const loggedDev = await Grap.findById(user);//não preciso mexer em nada aqui.
-        const targetDev = await Grap2.findById(devId);//eu poderia trocar o findById por create.
+        const UsuarioLogado = await Grap.findById(user);//não preciso mexer em nada aqui.
+        const UsuarioReceptor = await Grap2.findById(devId);//eu poderia trocar o findById por create.
 
+        UsuarioReceptor.likes.push(UsuarioLogado.nome);
 
-        if(!loggedDev.nome == targetDev.likes){
-            targetDev.likes.push(loggedDev.nome);
-
-            targetDev.save();//salva dentro do array.
-        }
-        
-        return res.json(loggedDev);//retorna para o usuario logado.
+        await UsuarioReceptor.save();//salva dentro do array.
+  
+        return res.json(UsuarioLogado);//retorna para o usuario logado.
     }
 };
+
+// if(!loggedDev.nome == targetDev.likes){
+//     targetDev.likes.push(loggedDev.nome);
+
+//     targetDev.save();//salva dentro do array.
+// }
