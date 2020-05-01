@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 // const parseStrings = require('./parseString');
 
-const Grap2 = mongoose.model('Usuario');
 const Grap = mongoose.model('Job');
 
 module.exports = {
@@ -10,15 +9,11 @@ module.exports = {
         return res.json(Gra);
     },
 
-    async store(req, res){
-        const { user } = req.headers;
-
-        const GetName = await Grap2.findById(user);
-
-
+    async store(req, res){        
         const {
             _id,
             nick,
+            nome,
             elo,
             num,
             wpp,
@@ -33,7 +28,7 @@ module.exports = {
         const user = await Grap.create({
             _id,
             nick,
-            nome : GetName.nome,
+            nome,
             elo,
             num,
             wpp,
