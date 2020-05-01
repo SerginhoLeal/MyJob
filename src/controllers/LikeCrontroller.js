@@ -11,10 +11,19 @@ module.exports = {
         const UsuarioLogado = await Grap.findById(user);//não preciso mexer em nada aqui.
         const UsuarioReceptor = await Grap2.findById(devId);//eu poderia trocar o findById por create.
 
-        UsuarioReceptor.likes.push(UsuarioLogado.nome);
+        try{
+            if(UsuarioLogado.nome == UsuarioReceptor.likes)
+                return res.status(400).json({error: 'Nop'})
 
-        await UsuarioReceptor.save();//salva dentro do array.
-  
+
+            UsuarioReceptor.likes.push(UsuarioLogado.nome);
+
+            await UsuarioReceptor.save();//salva dentro do array.
+
+        }catch{
+            return res.status(400).send({error:'fail'});
+        }
+
         return res.json(UsuarioLogado);//retorna para o usuario logado.
     }
 };
