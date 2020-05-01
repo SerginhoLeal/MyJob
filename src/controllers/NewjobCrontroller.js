@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 // const parseStrings = require('./parseString');
 
+const Grap2 = mongoose.model('Usuario');
 const Grap = mongoose.model('Job');
 
 module.exports = {
@@ -10,23 +11,29 @@ module.exports = {
     },
 
     async store(req, res){
+        const { user } = req.headers;
+
+        const GetName = await Grap2.findById(user);
+
+
         const {
             _id,
-            nome,
+            nick,
             elo,
             num,
             wpp,
         } = req.body;
 
     try{
-        if(await Grap.findOne({nome}))//se encontrar um email o cadastro não será realizado
+        if(await Grap.findOne({nick}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Nome já em uso!'});
 
         // const desc = parseStrings(elo);
 
         const user = await Grap.create({
             _id,
-            nome,
+            nick,
+            nome : GetName.nome,
             elo,
             num,
             wpp,

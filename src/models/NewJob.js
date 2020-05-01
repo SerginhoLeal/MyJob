@@ -6,6 +6,10 @@ const SearchSchema = new Schema({
         type: String,
         required: true,
     },
+    nick:{
+        type: String,
+        required: true,
+    },
     nome:{
         type: String,
         required: true,
@@ -22,10 +26,10 @@ const SearchSchema = new Schema({
         type: String,
         required: true,
     },
-    likes:[{
-        type: String,
-        ref: 'Job',
-    }],
+    likes:{
+        type: [String],
+        unique:false
+    },
 },{
     timestamps:true,
 });

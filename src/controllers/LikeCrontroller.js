@@ -12,8 +12,11 @@ module.exports = {
         const UsuarioReceptor = await Grap2.findById(devId);//eu poderia trocar o findById por create.
 
         try{
-            if(UsuarioLogado.nome == UsuarioReceptor.likes)
-                return res.status(400).json({error: 'Nop'})
+            if(UsuarioLogado.nome == UsuarioReceptor.nome)//para que o criador não possa dar like em si mesmo
+                return res.status(400).json({error: 'Você não pode se avaliar'})
+
+            if(UsuarioLogado.nome == UsuarioReceptor.likes)//para que o criador não possa dar like em si mesmo
+                return res.status(400).json({error: 'Você Já deixou o seu like'})
 
 
             UsuarioReceptor.likes.push(UsuarioLogado.nome);
