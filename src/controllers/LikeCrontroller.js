@@ -31,9 +31,3 @@ module.exports = {
         return res.json(UsuarioReceptor);//retorna para o usuário logado.
     }
 };
-
-// if(!loggedDev.nome == targetDev.likes){
-//     targetDev.likes.push(loggedDev.nome);
-
-//     targetDev.save();//salva dentro do array.
-// }
