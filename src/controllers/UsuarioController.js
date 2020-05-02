@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
+const authConfig = require('../Config/auth.json');
 
 const Grap = mongoose.model('Usuario');
+
+function generateToken(params = {}){
+    return jwt.sign(params, authConfig.secret,{
+        expiresIn: 86400,
+    });
+}
 
 module.exports = {
     async login(req, res){
@@ -18,7 +26,8 @@ module.exports = {
         user.password = undefined;
 
         res.send({
-            user
+            user,
+            token:generateToken({id: user.id}),
         });
     },
 
@@ -30,7 +39,10 @@ module.exports = {
 
         const user = await Grap.create(req.body);
 
-        res.send({user});
+        res.send({
+            user,
+            token:generateToken({id: user.id}),
+        });
 
         user.password = undefined;
 
