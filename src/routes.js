@@ -13,6 +13,7 @@ routes.post('/NRBQlog6f2Pwnqe3adQJ', UsuarioController.store);
 
 routes.get('/OTT7RrH1TRC7Ypo2iYtR', NewJobController.index);
 routes.post('/C7Ypo2iFU0OTT7RrH1TR', NewJobController.store);
+routes.delete('/GdXLWUFQwwAm927q/:id/se2Y4bkhAHMxPLRX', NewJobController.destroy);
 
 routes.get('/C7Ypo2iYtfLi8RrH1TRR', SearchController.index);
 routes.get('/C7YLi8H1TRRpo2RriYtf', KeyController.index);

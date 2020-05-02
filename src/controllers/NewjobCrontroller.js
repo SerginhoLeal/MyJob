@@ -41,4 +41,9 @@ module.exports = {
         }
     },
 
+    async destroy(req,res){
+        await Grap.findByIdAndRemove(req.params.id);
+        return res.send();
+    },
+
 };
