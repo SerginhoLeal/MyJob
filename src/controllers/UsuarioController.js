@@ -47,7 +47,7 @@ module.exports = {
         user.password = undefined;
 
         }catch(err){
-            return res.status(400).send({error:'fail'});
+            return res.status(400).send({error:'fail........................................'});
         }
     },
 };
