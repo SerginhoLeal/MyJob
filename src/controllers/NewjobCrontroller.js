@@ -21,13 +21,10 @@ module.exports = {
             wpp,
         } = req.body;
 
+        let user = await Grap.findOne({nick})
+
     try{
-        if(await Grap.findOne({nick}))//se encontrar um email o cadastro não será realizado
-            return res.status(400).send({error:'Nome já em uso!'});
-
-        // const desc = parseStrings(_id);
-
-        let user = await Grap.create({
+        user = await Grap.create({
             _id,
             nick,
             nome,
@@ -37,8 +34,9 @@ module.exports = {
         });
 
         const sendSocketMessageTo = findConnections(
-            {elo}
+            elo
         );
+        console.log(sendSocketMessageTo);
         sendMessage(sendSocketMessageTo, 'new-job', user)
 
         res.send({user});

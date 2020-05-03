@@ -24,7 +24,7 @@ exports.findConnections = (elo) => {
 }
 
 exports.sendMessage = (to, message, data) => {
-    to.forEach(element => {
+    to.forEach(connection => {
         io.to(connection.id).emit(message, data);
     });
 }
