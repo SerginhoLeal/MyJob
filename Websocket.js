@@ -5,5 +5,10 @@ exports.setupWebsocket = (server) =>{
 
     io.on('connection', socket => {
         console.log(socket.id);
+
+        setTimeout(() => {
+            socket.emit('message','hello Man')
+        }, 3000)
+        
     })
 };
