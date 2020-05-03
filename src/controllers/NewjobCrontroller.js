@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 // const parseStrings = require('./parseString');
+const {findConnections, sendMessage} = require('../../Websocket')
 
 const GrapUsuario = mongoose.model('Usuario');
 const Grap = mongoose.model('Job');
@@ -26,7 +27,7 @@ module.exports = {
 
         // const desc = parseStrings(_id);
 
-        const user = await Grap.create({
+        let user = await Grap.create({
             _id,
             nick,
             nome,
@@ -34,6 +35,11 @@ module.exports = {
             num,
             wpp,
         });
+
+        const sendSocketMessageTo = findConnections(
+            {elo}
+        );
+        sendMessage(sendSocketMessageTo, 'new-job', user)
 
         res.send({user});
 

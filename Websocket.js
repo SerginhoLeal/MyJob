@@ -1,14 +1,30 @@
 const socketio = require('socket.io');
 
+const connections = [];
+
+let io;
+
 exports.setupWebsocket = (server) =>{
-    const io = socketio(server);
+    io = socketio(server);
 
     io.on('connection', socket => {
-        console.log(socket.id);
+        const {elo} = socket.handshake.query;
 
-        setTimeout(() => {
-            socket.emit('message','hello Man')
-        }, 3000)
-        
-    })
+        connections.push({
+            id:socket.id,
+            elo,
+        });
+    });
 };
+
+exports.findConnections = (elo) => {
+    return connections.filter(connection => {
+        return connection.elo.some(item => elo.includes(item))
+    });
+}
+
+exports.sendMessage = (to, message, data) => {
+    to.forEach(element => {
+        io.to(connection.id).emit(message, data);
+    });
+}
