@@ -21,7 +21,7 @@ module.exports = {
             wpp,
         } = req.body;
 
-        let user = await Grap.findOne({nick})
+        let user = await Grap.findOne({_id,nick})
 
     try{
         user = await Grap.create({
