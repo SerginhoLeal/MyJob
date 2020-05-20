@@ -22,7 +22,7 @@ module.exports = {
         // let user = await Grap.findOne({nick})
 
     try{
-        if(await Bus.findOne({nick}))//se encontrar um email o cadastro não será realizado
+        if(await Grap.findOne({nick}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Empresa já em uso!'});
 
         user = await Grap.create({
