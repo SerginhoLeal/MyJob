@@ -2,10 +2,6 @@ const {Schema, model} = require('mongoose');
 const MP = require('mongoose-paginate');
 
 const SearchSchema = new Schema({
-    _id:{
-        type: String,
-        required: true,
-    },
     nick:{
         type: String,
         required: true,

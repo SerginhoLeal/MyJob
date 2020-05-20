@@ -12,7 +12,6 @@ module.exports = {
 
     async store(req, res){        
         const {
-            _id,
             nick,
             nome,
             elo,
@@ -20,11 +19,13 @@ module.exports = {
             wpp,
         } = req.body;
 
-        let user = await Grap.findOne({_id,nick})
+        // let user = await Grap.findOne({nick})
 
     try{
+        if(await Bus.findOne({nick}))//se encontrar um email o cadastro não será realizado
+            return res.status(400).send({error:'Empresa já em uso!'});
+
         user = await Grap.create({
-            _id,
             nick,
             nome,
             elo,
@@ -32,11 +33,11 @@ module.exports = {
             wpp,
         });
 
-        const sendSocketMessageTo = findConnections(
-            elo
-        );
-        console.log(sendSocketMessageTo);
-        sendMessage(sendSocketMessageTo, 'new-job', user)
+        // const sendSocketMessageTo = findConnections(
+        //     elo
+        // );
+        // console.log(sendSocketMessageTo);
+        // sendMessage(sendSocketMessageTo, 'new-job', user)
 
         res.send({user});
 
