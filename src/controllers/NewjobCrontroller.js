@@ -25,6 +25,9 @@ module.exports = {
         if(await Grap.findOne({nick}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Empresa já em uso!'});
 
+        if(await Grap.findOne({nome}))//se encontrar um email o cadastro não será realizado
+            return res.status(400).send({error:'Só é possível criar uma única vez'});
+
         user = await Grap.create({
             nick,
             nome,
