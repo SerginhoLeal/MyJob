@@ -49,6 +49,12 @@ module.exports = {
         }
     },
 
+    async update(req, res){
+        const user = await Grap.findByIdAndUpdate(req.params.id, req.body, {new:true});
+
+        return res.json(user);
+    },
+
     async destroy(req,res){
         await Grap.findByIdAndRemove(req.params.id);
         return res.send();
