@@ -22,6 +22,10 @@ const SearchSchema = new Schema({
         type: String,
         required: true,
     },
+    ask:{
+        type: String,
+        required: true,
+    },
     likes:{
         type: [String],
         unique:false
