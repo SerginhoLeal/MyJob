@@ -1,10 +1,11 @@
 const socketio = require('socket.io');
+const parseStrings = require('./src/controllers/parseString');
 
 const connections = [];
 
 let io;
 
-exports.setupWebsocket = (server) =>{
+exports.setupWebsocket = (server) => {
     io = socketio(server);
 
     io.on('connection', socket => {
@@ -12,7 +13,7 @@ exports.setupWebsocket = (server) =>{
 
         connections.push({
             id:socket.id,
-            elo,
+            elo:parseStrings(elo),
         });
     });
 };
@@ -27,4 +28,4 @@ exports.sendMessage = (to, message, data) => {
     to.forEach(connection => {
         io.to(connection.id).emit(message, data);
     });
-}
+};

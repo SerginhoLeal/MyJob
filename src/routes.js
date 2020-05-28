@@ -18,6 +18,7 @@ routes.delete('/GdXLWUFQwwAm927q/:id', NewJobController.destroy);
 
 routes.get('/C7Ypo2iYtfLi8RrH1TRR', SearchController.index);
 routes.get('/C7YpoRrH1TR2iFU0OTT7', SearchController.index2);
+
 routes.get('/C7YLi8H1TRRpo2RriYtf', KeyController.index);
 
 routes.post('/devs/:devId/Graphic', LikesController.store);

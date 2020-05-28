@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const parseStrings = require('./parseString');
+const parseStrings = require('./parseString');
 const {findConnections, sendMessage} = require('../../Websocket')
 
 const Grap = mongoose.model('Job');
@@ -17,36 +17,32 @@ module.exports = {
             elo,
             num,
             wpp,
+            ask,
         } = req.body;
 
-        // let user = await Grap.findOne({nick})
+        const EloArray = parseStrings(elo);
 
-    try{
-        if(await Grap.findOne({nick}))//se encontrar um email o cadastro não será realizado
-            return res.status(400).send({error:'Empresa já em uso!'});
-
+            // let user = await Grap.findOne({nome})
         if(await Grap.findOne({nome}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Só é possível criar uma única vez'});
 
         user = await Grap.create({
             nick,
             nome,
-            elo,
+            elo:EloArray,
             num,
             wpp,
+            ask
         });
 
-        // const sendSocketMessageTo = findConnections(
-        //     elo
-        // );
-        // console.log(sendSocketMessageTo);
-        // sendMessage(sendSocketMessageTo, 'new-job', user)
+        const sendSocketMessageTo = findConnections(
+            EloArray,
+        );
+        console.log(sendSocketMessageTo);
+        sendMessage(sendSocketMessageTo, 'new-job', user)
 
-        res.send({user});
+        return res.json({user});
 
-        }catch(err){
-            return res.status(400).send({error:'fail'});
-        }
     },
 
     async update(req, res){

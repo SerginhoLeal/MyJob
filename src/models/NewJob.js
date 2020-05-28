@@ -11,7 +11,7 @@ const SearchSchema = new Schema({
         required: true,
     },
     elo:{
-        type: String,
+        type: [String],
         required: true,
     },
     num:{
